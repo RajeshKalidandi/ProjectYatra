@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h2>Your Lessons</h2>
+{% if lessons %}
+    <ul>
+    {% for lesson in lessons %}
+        <li>
+            <a href="{% url 'lesson_detail' lesson.id %}">
+                {{ lesson.start_time|date:"F d, Y H:i" }} - {{ lesson.end_time|date:"H:i" }}
+                with {{ lesson.instructor }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>You have no lessons scheduled.</p>
+{% endif %}
+<a href="{% url 'book_lesson' %}">Book a New Lesson</a>
+{% endblock %}
